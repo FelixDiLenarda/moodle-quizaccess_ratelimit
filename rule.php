@@ -89,8 +89,11 @@ class quizaccess_ratelimit extends access_rule_base_alias {
         } else {
             $maxdelay = self::MAX_DELAY;
         }
-
-        $PAGE->requires->js_call_amd('quizaccess_ratelimit/ratelimit', 'init', [$maxdelay]);
+        $popuprequired = false;
+        if ($this->quiz->browsersecurity == "securewindow") {
+            $popuprequired = true;
+        }
+        $PAGE->requires->js_call_amd('quizaccess_ratelimit/ratelimit', 'init', [$maxdelay, $popuprequired]);
 
         return '';
     }
