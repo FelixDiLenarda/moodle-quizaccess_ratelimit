@@ -60,23 +60,8 @@ const delaySubmit = function(seconds, popupRequired, message = '') {
                 var popupWindow = window.open(formElement.action + '?' + serializedForm, 'quizpopup',
                     'width=' + screen.width + ', height=' + screen.height);
                 if(!popupWindow || popupWindow.outerHeight === 0) {
-                    // Popup wurde geblockt
                     alert('Pop-up wurde blockiert. Bitte erlauben Sie Pop-ups für diese Seite.');
                 }
-                popupWindow.onload = function() {
-                    popupWindow.document.body.addEventListener('click', function() {
-                        const element = popupWindow.document.documentElement;
-                        if (element.requestFullscreen) {
-                            element.requestFullscreen();
-                        } else if (element.webkitRequestFullscreen) {
-                            element.webkitRequestFullscreen();
-                        } else if (element.mozRequestFullScreen) {
-                            element.mozRequestFullScreen();
-                        } else if (element.msRequestFullscreen) {
-                            element.msRequestFullscreen();
-                        }
-                    });
-                };
             }
         } else {
             submitForm();
