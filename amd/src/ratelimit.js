@@ -62,6 +62,7 @@ const delaySubmit = function(seconds, popupRequired, message = '') {
                 if(!popupWindow || popupWindow.outerHeight === 0) {
                     alert('Pop-up wurde blockiert. Bitte erlauben Sie Pop-ups für diese Seite.');
                 }
+                return;
             }
         } else {
             submitForm();
