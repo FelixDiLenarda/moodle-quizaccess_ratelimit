@@ -57,9 +57,22 @@ const delaySubmit = function(seconds, popupRequired, message = '') {
             if (formElement) {
                 var formData = new FormData(formElement);
                 var serializedForm = new URLSearchParams(formData).toString().replace(/\bcancel=/, 'x=');
-                var options = "fullscreen";
-                window.open(formElement.action + '?' + serializedForm, 'quizpopup', options);
-                return;
+                var popupWindow = window.open(formElement.action + '?' + serializedForm, 'quizpopup',
+                    'width=' + screen.width + ', height=' + screen.height);                return;
+                popupWindow.onload = function() {
+                    popupWindow.document.body.addEventListener('click', function() {
+                        const element = popupWindow.document.documentElement;
+                        if (element.requestFullscreen) {
+                            element.requestFullscreen();
+                        } else if (element.webkitRequestFullscreen) {
+                            element.webkitRequestFullscreen();
+                        } else if (element.mozRequestFullScreen) {
+                            element.mozRequestFullScreen();
+                        } else if (element.msRequestFullscreen) {
+                            element.msRequestFullscreen();
+                        }
+                    });
+                };
             }
         } else {
             submitForm();
