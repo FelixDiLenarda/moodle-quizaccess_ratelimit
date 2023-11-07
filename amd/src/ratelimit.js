@@ -15,10 +15,15 @@ const button = form + ' input#id_submitbutton';
 
 export const init = (maxDelay, popupRequired) => {
     const maxDelayUntil = Date.now() + maxDelay * 1000;
-    const buttonElement = document.querySelector(button);
-    if (buttonElement) {
-        // Fügen Sie den Event Listener in der Capture-Phase hinzu
-        buttonElement.addEventListener('click', (e) => {
+
+    // Register click listener to root element '#mod_quiz_preflight_form' in capture phase to prevent propagation
+    // to the button-click listener in mod/quiz/amd/src/preflight.js:66 and therefore stop this event from firing.
+    const formElement = document.querySelector('#mod_quiz_preflight_form');
+    if (formElement) {
+        formElement.addEventListener('click', (e) => {
+            if (e.target.id !== 'id_submitbutton') {
+                return;
+            }
             e.preventDefault();
             e.stopPropagation();
             Ajax.call([{
@@ -41,14 +46,25 @@ export const init = (maxDelay, popupRequired) => {
                     delaySubmit(rand, popupRequired);
                 }
             }]);
-        }, true); // Der dritte Parameter `true` stellt sicher, dass der Event-Handler in der Capture-Phase ausgeführt wird.
+        }, true);
     }
 };
 
 const delaySubmit = function(seconds, popupRequired, message = '') {
     if (seconds === 0 ) {
-        submitForm();
-        return;
+        if (popupRequired) {
+            const formElement = document.querySelector('#mod_quiz_preflight_form');
+            if (formElement) {
+                var formData = new FormData(formElement);
+                var serializedForm = new URLSearchParams(formData).toString().replace(/\bcancel=/, 'x=');
+                var options = "fullscreen";
+                window.open(formElement.action + '?' + serializedForm, 'quizpopup', options);
+                return;
+            }
+        } else {
+            submitForm();
+            return;
+        }
     }
 
     // Tell the user what is happening when the delay is too long.
