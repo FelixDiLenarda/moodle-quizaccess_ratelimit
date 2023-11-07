@@ -58,7 +58,11 @@ const delaySubmit = function(seconds, popupRequired, message = '') {
                 var formData = new FormData(formElement);
                 var serializedForm = new URLSearchParams(formData).toString().replace(/\bcancel=/, 'x=');
                 var popupWindow = window.open(formElement.action + '?' + serializedForm, 'quizpopup',
-                    'width=' + screen.width + ', height=' + screen.height);                return;
+                    'width=' + screen.width + ', height=' + screen.height);
+                if(!popupWindow || popupWindow.outerHeight === 0) {
+                    // Popup wurde geblockt
+                    alert('Pop-up wurde blockiert. Bitte erlauben Sie Pop-ups für diese Seite.');
+                }
                 popupWindow.onload = function() {
                     popupWindow.document.body.addEventListener('click', function() {
                         const element = popupWindow.document.documentElement;
