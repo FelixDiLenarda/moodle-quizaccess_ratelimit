@@ -113,9 +113,8 @@ const delaySubmit = function(seconds, message = '') {
 
 const submitForm = function() {
     window.console.debug("submitForm");
-
     const formEl = document.querySelector(form);
-    const buttonEl = document.querySelector(button);
     markFormSubmitted(formEl);
-    buttonEl.click();
+    $(button).prop("disabled", false);
+    $(button).click();
 };
