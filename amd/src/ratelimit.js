@@ -30,6 +30,8 @@ export const init = (maxDelay) => {
             methodname: 'quizaccess_ratelimit_get_waiting_time',
             args: {},
             done: (response) => {
+                window.console.debug("AJAX CALL DONE");
+
                 maxDelay = Math.floor((maxDelayUntil - Date.now()) / 1000);
                 maxDelay = Math.max(0, maxDelay);
                 if (response.seconds >= maxDelay) {
@@ -110,6 +112,8 @@ const delaySubmit = function(seconds, message = '') {
 };
 
 const submitForm = function() {
+    window.console.debug("submitForm");
+
     const formEl = document.querySelector(form);
     const buttonEl = document.querySelector(button);
     markFormSubmitted(formEl);
