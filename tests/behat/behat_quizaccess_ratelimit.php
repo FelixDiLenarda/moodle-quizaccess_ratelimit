@@ -55,8 +55,7 @@ class behat_quizaccess_ratelimit extends behat_base {
      *
      * @Given /^I check the quiz popup window depending on Moodle version$/
      */
-    public function i_check_the_quiz_popup_window_depending_on_moodle_version()
-    {
+    public function i_check_the_quiz_popup_window_depending_on_moodle_version() {
         global $CFG;
         $branch = $CFG->branch;
 
