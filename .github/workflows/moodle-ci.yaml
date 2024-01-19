@@ -3,7 +3,7 @@ name: Moodle Plugin CI
 on:
   push:
     branches:
-      - master
+      - quiz_popup_lokal
   pull_request:
   schedule:
     # At 00:00 on the 1st of every month
