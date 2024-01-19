@@ -99,7 +99,7 @@ Feature: Getting rate limited in different scenarios.
     And I press "Start attempt"
     And I wait "25" seconds
     And I switch to a second window
-    Then I should see "Answer the first question"
+    Then I check the quiz popup window depending on Moodle version
     And I log out
 
   Scenario: Secure window and password enabled.
@@ -140,7 +140,7 @@ Feature: Getting rate limited in different scenarios.
     And I should see "The server is processing many requests at the moment."
     And I wait "25" seconds
     And I switch to a second window
-    Then I should see "Answer the first question"
+    Then I check the quiz popup window depending on Moodle version
     And I log out
 
   Scenario: Enforce wait time.
