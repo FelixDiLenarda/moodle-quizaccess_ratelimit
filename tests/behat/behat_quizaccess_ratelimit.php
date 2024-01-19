@@ -55,18 +55,15 @@ class behat_quizaccess_ratelimit extends behat_base {
      *
      * @Given /^I check the quiz popup window depending on Moodle version$/
      */
-    public function i_check_the_quiz_popup_window_depending_on_moodle_version() {
+    public function i_check_the_quiz_popup_window_depending_on_moodle_version()
+    {
         global $CFG;
         $branch = $CFG->branch;
 
         if ($branch === '401') {  // If moodle 401 check "I should see "Answer the first question".
             $this->assertSession()->pageTextContains("Answer the first question");
-        } else if ($branch === '402') { // If moodle 402 check "I should see "Attempt quiz".
-            $this->assertSession()->pageTextContains("Attempt quiz");
-        } else {
-            // Accept the popup window but raise warning: 'The popup was not checked because of the Moodle Version'.
-            $this->assertTrue(true, 'Der Popup-Check wurde aufgrund der Moodle-Version nicht durchgeführt.');
-            // Test II.
+        } else {  // If moodle 402 or 403 check "I should see "Start attempt".
+            $this->assertSession()->pageTextContains("Start attempt");
         }
     }
 }
