@@ -66,6 +66,7 @@ class behat_quizaccess_ratelimit extends behat_base {
         } else {
             // Accept the popup window but raise warning: 'The popup was not checked because of the Moodle Version'
             $this->assertTrue(true, 'Der Popup-Check wurde aufgrund der Moodle-Version nicht durchgeführt.');
+            // Test
         }
     }
 }
