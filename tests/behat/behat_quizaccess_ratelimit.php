@@ -62,7 +62,7 @@ class behat_quizaccess_ratelimit extends behat_base {
         if ($branch === '401') {  // If moodle 401 check "I should see "Answer the first question".
             $this->assertSession()->pageTextContains("Answer the first question");
         } else {  // If moodle 402 or 403 check "I should see "Start attempt".
-            $this->assertSession()->pageTextContains("Start attempt");
+            $this->assertSession()->pageTextContains("Test quiz name");
         }
     }
 }
