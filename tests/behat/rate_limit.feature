@@ -44,8 +44,7 @@ Feature: Getting rate limited in different scenarios.
     And I wait "1" seconds
     And I switch to a second window
     And I wait until the page is ready
-    And I should see "Test quiz name"
-      # And I check the quiz popup window depending on Moodle version
+    And I check the quiz popup window depending on Moodle version
     And I switch to a second window
     And I close all opened windows
     And I log out
@@ -58,7 +57,7 @@ Feature: Getting rate limited in different scenarios.
     And I should see "The server is processing many requests at the moment."
     And I wait "25" seconds
     And I switch to a second window
-    Then I should see "Test quiz name"
+    Then I check the quiz popup window depending on Moodle version
     And I log out
 
   Scenario: Secure window cancel.
